@@ -1,0 +1,6 @@
+   **Ne işe yarar:** Python, gerçek zamanlı sistemler için uygun bir dil değildir. Zaman kritikliğine sahip görevlerin zamanında işlenmesi, Python'un çözülemeyen zaman gecikmeleri nedeniyle zor olacaktır. Gerçek zamanlı sistemler için daha düşük seviyeli diller gerekir.
+
+4. **Direkt İşletim Sistemi Kodu Yazma**
+   ```python
+   def kernel_function():
+       pass
