@@ -1,0 +1,90 @@
+        l=QVBoxLayout()
+        w=QWidget()
+        w.setLayout(l)
+        self.p1=QLineEdit()
+        self.p1_2=QLineEdit()
+        self.p2=QTextEdit()
+        self.p3=QPushButton('Ara')
+        self.p1.setAlignment(Qt.AlignCenter)
+        self.p1_2.setAlignment(Qt.AlignCenter)
+        self.p2.setAlignment(Qt.AlignCenter)
+        self.p2.setReadOnly(True)
+        self.p2.setPlaceholderText('Hava durumu verileri buraya eklenir...')
+        self.p2.setLineWrapMode(PyQt5.QtWidgets.QTextEdit.NoWrap)
+        self.p1.setPlaceholderText('İl')
+        self.p1_2.setPlaceholderText('İlçe')
+        self.p1.setStyleSheet('''QLineEdit{
+                              background-color:white;
+                              font-size:14px;
+                              font-weight:bold;
+                              border-radius:6px;   
+                              border:2px solid gray;                           
+}
+                              QLineEdit:hover{
+                              font-size:16px;
+                              border:3px solid gray;
+}
+                              ''')        
+        self.p1_2.setStyleSheet('''QLineEdit{
+                              background-color:white;
+                              font-size:14px;
+                              font-weight:bold;
+                              border-radius:6px;   
+                              border:2px solid gray;                           
+}
+                              QLineEdit:hover{
+                              font-size:16px;
+                              border:3px solid gray;
+}
+                              ''')
+        self.p2.setStyleSheet('''QTextEdit{
+                              background-color:white;
+                              font-size:14px;
+                              font-weight:bold;
+                              border-radius:6px;   
+                              border:2px solid gray;                           
+}
+                              QTextEdit:hover{
+                              font-size:16px;
+                              border:3px solid gray;
+}
+''')
+        self.p3.setStyleSheet('''QPushButton{
+                              background-color:green;
+                              color:white;
+                              border:2px solid gray;
+                              border-radius:7px;
+                              font-size:18px;
+                              font-weight:bold;
+                              font-family:consolas;                              
+}
+                              QPushButton:hover{
+                              border:3px solid gray;                              
+}
+                              QPushButton:pressed{
+                              border:4.5px solid gray;
+                              font-size:22px                              
+}
+''')
+
+        l.addWidget(self.p1)
+        l.addWidget(self.p1_2)
+        l.addWidget(self.p2)
+        l.addWidget(self.p3)
+        self.p3.clicked.connect(self.mainFunction)
+        self.setCentralWidget(w)
+        
+    def mainFunction(self):
+        chromeOptions = webdriver.ChromeOptions()
+        chromeOptions.add_argument('--headless')
+        chromeOptions.add_argument('--log_level=0')
+        driver=webdriver.Chrome(options=chromeOptions)
+        driver.delete_all_cookies()
+        driver.get(f'https://www.mgm.gov.tr/tahmin/il-ve-ilceler.aspx?il={self.p1.text()}&ilce={self.p1_2.text()}')
+        info1=driver.find_element(By.XPATH,'//*[@id="pages"]/div/section/div[5]/div[1]/div[1]').text
+        info2=driver.find_element(By.XPATH,'//*[@id="pages"]/div/section/div[5]/div[1]/div[2]/div[2]').text
+        info3=driver.find_element(By.XPATH,'//*[@id="pages"]/div/section/div[5]/div[1]/div[3]/div[2]/div[1]').text
+        info4=driver.find_element(By.XPATH,'//*[@id="pages"]/div/section/div[5]/div[2]/div[1]/div[2]/div[2]').text
+        info5=driver.find_element(By.XPATH,'//*[@id="pages"]/div/section/div[5]/div[2]/div[2]/div[2]/div[2]').text
+        self.p2.clear()
+        self.p2.append(f'Derece: {info1}\nHava: {info2}\nHava durumu: {info3}\nNem: {info4}\nRüzgar: {info5}')
