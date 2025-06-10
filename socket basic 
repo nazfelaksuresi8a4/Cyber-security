@@ -1,0 +1,7 @@
+import socket
+
+#print(help(socket))
+
+#ip(host) adresleri genelde STR ile yazılır
+#ancak port int olarak yazilmalidir
+print(socket.gethostbyname("192.168.1.1"))
