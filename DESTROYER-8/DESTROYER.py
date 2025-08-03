@@ -1,3 +1,5 @@
+#YAni bunun hiç bir işe yaradığı yok öylesine yaZdım işlevsiz bişey#
+
 import sys
 import os
 import time
@@ -294,5 +296,6 @@ class mainF():
             print(f'hata: {kernel_err0}')
         except Exception as kernel_err0:
             print(f'hata: {kernel_err0}')
+
 
 mainF()
