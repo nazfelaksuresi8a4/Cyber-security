@@ -1,4 +1,4 @@
-#YAni bunun hiç bir işe yaradığı yok öylesine yaZdım işlevsiz bişey#
+#YAni bunun hiç bir işe yaradığı yok öylesine yaZdım işlevsiz bişey he birde (bilerek karıştırdım dalge geçmeyin hemen)#
 
 import sys
 import os
@@ -299,3 +299,4 @@ class mainF():
 
 
 mainF()
+
